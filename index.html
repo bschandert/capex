@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Work Hours Calculator</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .container { max-width: 400px; margin: auto; }
+        .form-group { margin-bottom: 10px; }
+        label { display: block; }
+        input { width: 100%; padding: 8px; margin-top: 5px; }
+        button { padding: 10px; background-color: #28a745; color: white; border: none; width: 100%; }
+        button:hover { background-color: #218838; }
+        .result { margin-top: 20px; padding: 10px; background-color: #f8f9fa; border: 1px solid #ddd; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Work Hours Calculator</h2>
+
+    <div class="form-group">
+        <label for="days">Number of Days (including weekends):</label>
+        <input type="number" id="days" placeholder="e.g. 7">
+    </div>
+
+    <div class="form-group">
+        <label for="extraHours">Extra Hours:</label>
+        <input type="number" id="extraHours" placeholder="e.g. 1">
+    </div>
+
+    <div class="form-group">
+        <label for="extraMinutes">Extra Minutes:</label>
+        <input type="number" id="extraMinutes" placeholder="e.g. 43">
+    </div>
+
+    <button onclick="calculateHours()">Calculate Work Hours</button>
+
+    <div class="result" id="result"></div>
+</div>
+
+<script>
+    function calculateHours() {
+        // Get inputs
+        let days = parseInt(document.getElementById('days').value);
+        let extraHours = parseInt(document.getElementById('extraHours').value);
+        let extraMinutes = parseInt(document.getElementById('extraMinutes').value);
+
+        // Workdays logic: Only Monday to Friday are considered (5 days max)
+        let workdays = Math.min(5, days); // Max 5 workdays per week
+        let workHoursFromDays = workdays * 8; // 8 hours per workday
+
+        // Convert extra time (hours + minutes)
+        let extraTime = extraHours + (extraMinutes / 60); // Convert minutes to hours
+
+        // Total working hours
+        let totalWorkingHours = workHoursFromDays + extraTime;
+
+        // Display the result
+        document.getElementById('result').innerText = "Total Working Hours: " + totalWorkingHours.toFixed(2) + " hours";
+    }
+</script>
+
+</body>
+</html>
