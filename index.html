@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Work Hours Calculator - Team</title>
+    <title>Work Hours Calculator</title>
     <style>
         body { font-family: Arial, sans-serif; padding: 20px; }
         .container { max-width: 400px; margin: auto; }
@@ -47,15 +47,28 @@
         let extraHours = parseInt(document.getElementById('extraHours').value);
         let extraMinutes = parseInt(document.getElementById('extraMinutes').value);
 
-        // Workdays logic: Only Monday to Friday are considered (5 days max)
-        let workdays = Math.min(5, days); // Max 5 workdays per week
-        let workHoursFromDays = workdays * 8; // 8 hours per workday
+        // Step 1: Calculate number of complete weeks
+        let fullWeeks = Math.floor(days / 7);
+        let remainingDays = days % 7;
 
-        // Convert extra time (hours + minutes)
+        // Step 2: Calculate workdays in full weeks (5 workdays per week)
+        let workdaysFromFullWeeks = fullWeeks * 5;
+
+        // Step 3: Handle the remaining days after full weeks
+        // Only count Monday to Friday as workdays (max 5 workdays in remaining days)
+        let workdaysFromRemainingDays = Math.min(remainingDays, 5);
+
+        // Step 4: Total workdays
+        let totalWorkdays = workdaysFromFullWeeks + workdaysFromRemainingDays;
+
+        // Step 5: Calculate total work hours from workdays (8 hours per workday)
+        let totalWorkHoursFromDays = totalWorkdays * 8;
+
+        // Step 6: Convert extra time (hours + minutes)
         let extraTime = extraHours + (extraMinutes / 60); // Convert minutes to hours
 
-        // Total working hours
-        let totalWorkingHours = workHoursFromDays + extraTime;
+        // Step 7: Total working hours including extra time
+        let totalWorkingHours = totalWorkHoursFromDays + extraTime;
 
         // Display the result
         document.getElementById('result').innerText = "Total Working Hours: " + totalWorkingHours.toFixed(2) + " hours";
