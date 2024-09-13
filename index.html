@@ -44,6 +44,13 @@
       font-size: small;
       padding: 0 0 .25rem .15rem;
   }
+  
+  p > span {
+    background-color: blue;
+    border-radius: 1rem;
+    padding: 2px 4px;
+  }
+        
   label > span {
       font-weight: bold;
   }
@@ -78,6 +85,9 @@
 
 <div class="container">
     <h2>Work Hours Calculator</h2>
+    <p>
+        In Jira, go to the transition tab to get the time in source status from <span>In Progress</span> to <span>Review</span>
+    </p>
 
     <div class="form-group">
         <label for="days">Number of Days (including weekends):</label>
